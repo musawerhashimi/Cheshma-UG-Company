@@ -1,0 +1,257 @@
+{%load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheshma Imprint</title>
+    <!-- Vendor CSS Files -->
+    <link
+      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.jpg' %}" rel="icon" />
+    <link href="{% static 'assets/img/favicon.jpg' %}" rel="apple-touch-icon" />
+  </head>
+
+  <body class="index-page">
+    <header
+      style="background-color: rgba(21, 34, 43, 0.85)"
+      id="header"
+      class="header d-flex align-items-center fixed-top"
+    >
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a
+          href="{% url 'home' %}"
+          class="logo d-flex align-items-center me-auto"
+        >
+          <img class="w-50" src="{% static 'assets/img/Logo.png' %}" alt="" />
+          <h1 class="sitename">Cheshma</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li>
+              <a data-translate="home" href="{% url 'home' %}">Home</a>
+            </li>
+
+            <li>
+              <a href="" data-translate="imprint" class="active">Imprint</a>
+            </li>
+
+            <li>
+              <select id="langSelect" class="p-1 rounded-1">
+                <option value="en"><span class="ms-3">🇬🇧</span> English</option>
+                <option value="de">
+                  <span class="ms-3">🇩🇪</span> Deutschland
+                </option>
+              </select>
+            </li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </header>
+    <br /><br />
+    <div class="container my-5">
+      <div id="route_imprent" style="margin-top: 98px" class="fixed-top p-1">
+        <ul>
+          <li style="display: inline-block">
+            <a href="{% url 'home' %}"><i class="bi bi-house fs-6"></i> ></a>
+          </li>
+          <li style="display: inline-block">
+            <a
+              style="color: rgba(21, 34, 43, 0.85)"
+              data-translate="imprint"
+              href=""
+              >Imprint</a
+            >
+          </li>
+        </ul>
+      </div>
+      <br />
+      <div
+        style="background: linear-gradient(#1783ff, #f3a984)"
+        class="mt-2 p-2 ms-2 rounded-2 shadow-md"
+      >
+        <h1
+          data-translate="imprint_title"
+          id="imprint_title"
+          class="text-white"
+        >
+          Site operator of Cheshma.eu and responsible for all content
+        </h1>
+      </div>
+      <div>
+        <h4 id="imprint_title_2" class="p-1 mt-2 fw-bolder">
+          Cheshma UG (haftungsbeschränkt)
+        </h4>
+        <h6 class="ms-3 p-1">SchleebergstrBe 29</h6>
+        <h6 class="ms-3 p-1">59320 Ennigerloh</h6>
+        <h6 class="ms-3 p-1">Germany</h6>
+        <h4 class="ms-2 p-1 fw-bolder">Commercial Register</h4>
+        <h5 class="ms-3 p-1">District Court of Müntser: HRB 22414</h5>
+        <p style="text-justify: auto" class="p-2" data-translate="about_p2">
+          Cheshma UG is a Germany-based trading company specializing in the
+          import and wholesale of carefully selected products, with a current
+          focus on authentic goods from Afghanistan. Founded in 2025, we aim to
+          connect global markets through culturally rich, high-quality
+          merchandiseOur initial product range includes traditional Afghan items
+          such as handicrafts, textiles, dried fruits, and spices, reflecting
+          the country’s deep heritage and artisanal expertise. We work closely
+          with local producers and suppliers to ensure authenticity, ethical
+          sourcing, and consistent quality.
+        </p>
+
+        <h4 class="fw-bolder ms-2">Contact</h4>
+        <h6 class="ms-2">Email : <a href="">info.cheshma@gmail.com</a></h6>
+        <h6 class="ms-2">
+          Telephone : <a href="tel:+4915510945230">+49 155 10945 230</a>
+        </h6>
+      </div>
+    </div>
+
+    <footer id="footer" class="footer dark-background">
+      <div class="container footer-top">
+        <div class="row gy-4 gap-4">
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a
+              href="{% static 'index.html' %}"
+              class="logo d-flex align-items-center"
+            >
+              <span class="sitename">Cheshma</span>
+            </a>
+
+            <div class="footer-contact pt-3">
+              <img
+                class="img-fluid rounded-2"
+                src="{% static 'assets/img/footer.jpg' %}"
+                alt=""
+              />
+            </div>
+
+            <div class="social-links d-flex mt-4">
+              <a href="{% static '' %}"><i class="bi bi-twitter-x"></i></a>
+              <a href="{% static '' %}"><i class="bi bi-facebook"></i></a>
+              <a href="{% static '' %}"><i class="bi bi-instagram"></i></a>
+              <a href="{% static '' %}"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links p-3">
+            <h4>Useful Links</h4>
+            <ul class="fw-bolder">
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a data-translate="home" href="{% url 'home'%}">Home</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a data-translate="our_company" href="{% url 'home'%}#about"
+                  >Our Company</a
+                >
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a data-translate="services" href="{% url 'home'%}#services"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a data-translate="products" href="{% url 'home'%}#product"
+                  >Our Products</a
+                >
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a data-translate="our_team" href="{% url 'home'%}#team"
+                  >Our Team</a
+                >
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a data-translate="client" href="{% url 'home'%}#clients"
+                  >Our Clients</a
+                >
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a
+                  target="_blank"
+                  data-translate="imprint"
+                  href="{% url 'imprint' %}"
+                  >Imprint</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-12 footer-newsletter">
+            <h4 class="p-2" data-translate="goals">Our Goals</h4>
+            <h3 data-translate="footer_p1" class="mb-3">
+              We reflect Afghani culture in Germany.
+            </h3>
+
+            <h2 style="background-color: #1783ff" class="text-center rounded-4">
+              🇦🇫 <span class="ms-3"></span>🇩🇪
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="container copyright text-center mt-4">
+        <p>
+          2025 © <span>Copyright</span>
+          <strong class="px-1 sitename">Cheshma</strong>
+          <span>All Rights Reserved</span>
+        </p>
+        <div class="credits">
+          Designed & Developed by
+          <a target="_blank" href="https:www.linkedin.com/in/musawer-hashimi"
+            >Sayed Musawer Hashimi</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/translates.js'%}"></script>
+  </body>
+</html>

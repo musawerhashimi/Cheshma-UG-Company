@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %} {% block title %}{% if subtitle %}{{ subtitle }}
+| {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}
+{%endblock %} {% block branding %}
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}"
+    >{{ site_header|default:_('Django administration') }} of
+    <span style="color: white; font-size: 27px">Cheshma</span></a
+  >
+</h1>
+<a
+  style="color: white; line-height: 2.5; font-size: 17px; font-weight: bolder"
+  href="{% url 'home' %}"
+  >Home>
+</a>
+
+{% if user.is_anonymous %} {% include "admin/color_theme_toggle.html" %}
+{%endif%} {% endblock %} {% block nav-global %}{% endblock %}

@@ -1,0 +1,140 @@
+{%load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      background-image: url("{% static 'assets/img/testimonials-bg.jpg'%}");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+
+  <body>
+    <div class="message-container bg-primary text-white">
+      {% if messages %} {% for message in messages %}
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+    <div class="container mt-5">
+      <a class="btn btn-primary py-0 px-2" href="{% url 'home' %}"
+        ><i class="bi bi-arrow-left-square"></i> Back</a
+      >
+      <h2 class="mt-2 text-white fw-bolder p-1 text-center">
+        <span class="text-primary">Cheshma</span> Admin Panel
+      </h2>
+      <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3 mt-3">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="Enter Username"
+            name="username"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="pwd">Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="pwd"
+            placeholder="Enter password"
+            name="password"
+          />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="py-1 px-2 btn btn-primary">
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <div class="mb-3 text-center">
+        <button
+          id="forgot"
+          class="border-white text-white rounded-2 bg-transparent"
+          data-bs-toggle="modal"
+          data-bs-target="#emailModal"
+        >
+          Forgot Password ?
+        </button>
+      </div>
+      <div
+        class="modal fade"
+        id="emailModal"
+        tabindex="-1"
+        aria-labelledby="emailModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="emailModalLabel">Enter Your Email</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="{% url 'reset_password' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="emailInput" class="form-label"
+                    >Email address</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="emailInput"
+                    placeholder="name@example.com"
+                    required
+                    name="email"
+                  />
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

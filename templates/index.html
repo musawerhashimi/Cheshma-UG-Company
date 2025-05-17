@@ -1,0 +1,594 @@
+{%load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Cheshma</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.jpg' %}" rel="icon" />
+  <link href="{% static 'assets/img/favicon.jpg' %}" rel="apple-touch-icon" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+  <!-- =======================================================
+  * Project Name: Cheshma
+  * Updated: May 10 2025 with Js,Bootstrup,Css,Html,Django,Rest-API
+  * Author: Sayed Musawer Hashimi
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+  <div class="message-container">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      ✅ {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
+        <img class="w-50" src="{% static 'assets/img/Logo.png' %}" alt="" />
+        <h1 class="sitename">Cheshma</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li>
+            <a data-translate="home" href="#hero" class="active">Home</a>
+          </li>
+          <li class="dropdown">
+            <a href=""><span data-translate="about">About Us</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li>
+                <a data-translate="our_company" href="#about">Our Company</a>
+              </li>
+
+              <li><a data-translate="our_team" href="#team">Our Team</a></li>
+              <li>
+                <a data-translate="client" href="#clients">Our Clients</a>
+              </li>
+            </ul>
+          </li>
+          <li><a data-translate="services" href="#services">Services</a></li>
+          <li>
+            <a data-translate="products" href="#product">Our Products</a>
+          </li>
+          <li><a data-translate="news" href="#news">News</a></li>
+          <li><a data-translate="contact" href="#contact">Contact</a></li>
+          {% if user.is_authenticated %}
+          <li><a target="_blank" href="{% url 'admin:index' %}">Admin</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login'%}">Login</a></li>
+          {% endif %}
+          <li>
+            <select id="langSelect" class="p-1 rounded-1">
+              <option value="en"><span class="ms-3">🇬🇧</span> English</option>
+              <option value="de"><span class="ms-3">🇩🇪</span> Deutschland</option>
+            </select>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+      {% if background_image.image %}
+      <img src="{{ background_image.image.url }}" alt="" data-aos="fade-in" />
+      {% endif %}
+      <div class="container d-flex flex-column align-items-center">
+        <h2 data-translate="title" data-aos="fade-up" data-aos-delay="100">
+          we reflect afghan culture here.
+        </h2>
+        <p data-translate="subtitle" data-aos="fade-up" data-aos-delay="200">
+          We Provide Afghani Products.
+        </p>
+        <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+          <a data-translate="buttontitle" href="#about" class="btn-get-started">Get Started</a>
+        </div>
+      </div>
+    </section>
+    <!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 data-translate="about_p1">
+              CHESHMA, Supplier of Afghani products Company
+            </h3>
+            <img src="{% static 'assets/img/Ab.jpg' %}" class="img-fluid rounded-4 mb-4" alt="" />
+            <p data-translate="about_p2">
+              Cheshma UG is a Germany-based trading company specializing in
+              the import and wholesale of carefully selected products, with a
+              current focus on authentic goods from Afghanistan. Founded in
+              2025, we aim to connect global markets through culturally rich,
+              high-quality merchandise.Our initial product range includes
+              traditional Afghan items such as handicrafts, textiles, dried
+              fruits, and spices, reflecting the country’s deep heritage and
+              artisanal expertise. We work closely with local producers and
+              suppliers to ensure authenticity, ethical sourcing, and
+              consistent quality.
+            </p>
+            <p data-translate="about_p3">
+              While our roots are in Afghan trade, our long-term vision is to
+              grow into a diverse international trading platform, offering a
+              wide variety of goods and building lasting partnerships
+              worldwide.
+            </p>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="content ps-0 ps-lg-5 mt-5">
+              <ul>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-translate="about_p4">We look forward to building new connections and
+                    delivering value through global commerce.</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-translate="about_p5">Authentic Product Sourcing Direct collaboration with
+                    Afghan artisans and producers ensures genuine, culturally
+                    rich goods.</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-translate="about_p6">Ethical and Fair Trade Practices Strong commitment to
+                    ethical sourcing and fair compensation for local
+                    suppliers.</span>
+                </li>
+              </ul>
+              <p data-translate="about_p7">
+                Cultural and Market Expertise Deep understanding of Afghan
+                heritage and its products, giving Cheshma a unique edge in
+                niche markets.
+              </p>
+
+              <div class="position-relative mt-4">
+                <img src="{% static 'assets/img/B.png' %}" class="img-fluid rounded-4" alt="" />
+                <p data-translate="about_p8" class="fst-italic mt-3">
+                  We are a young company with a strong commitment to
+                  transparency, fair trade, and customer satisfaction.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /About Section -->
+    <!-- Services Section -->
+    <section id="services" class="services section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-translate="services">Services</h2>
+        <p data-translate="services_sub">Featured Srvices<br /></p>
+      </div>
+      <!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-5">
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="service-item">
+              <div class="img">
+                <img src="{% static 'assets/img/service-1.jpg' %}" class="img-fluid" alt="" />
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <h3 data-translate="services_1">
+                  Authentic Sourceing & Quality Assurance
+                </h3>
+                <p data-translate="services_p1">
+                  We partner directly with Afghan artisans and farmers to
+                  source authentic products from handcrafted textiles to
+                  organic dried fruits ensuring every item meets strict
+                  quality standards and reflects true cultural heritage.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="service-item">
+              <div class="img">
+                <img src="{% static 'assets/img/service-2.jpg' %}" class="img-fluid" alt="" />
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-bag-check"></i>
+                </div>
+                <h3 data-translate="services_2">
+                  Ethical Trade & Local Empowerment
+                </h3>
+
+                <p data-translate="services_p2">
+                  We are committed to fair trade practices, offering fair
+                  compensation and sustainable support to local Afghan
+                  producers. Your purchase helps preserve traditional crafts
+                  and uplifts rural communities.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="service-item">
+              <div class="img">
+                <img src="{% static 'assets/img/service-3.jpg' %}" class="img-fluid" alt="" />
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-bus-front"></i>
+                </div>
+
+                <h3 data-translate="services_3">
+                  Global Wholesale & Custom Supply Solutions
+                </h3>
+
+                <p data-translate="services_p3">
+                  Whether you're a boutique, restaurant, or specialty store,
+                  Cheshma offers flexible wholesale options and personalized
+                  sourcing services to meet your business needs delivered
+                  reliably across Europe and beyond.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+        </div>
+      </div>
+    </section>
+    <!-- /Services Section -->
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-translate="client">Our Clients</h2>
+        <p data-translate="client_sub">Featured Clients<br /></p>
+      </div>
+      <div class="container" data-aos="fade-up">
+        <div class="swiper clients-slider">
+          <div class="swiper-wrapper">
+            {% for partner in partners%}
+            <div class="swiper-slide">
+              {% if partner.image %}
+              <img src="{{ partner.image.url }}" class="img-fluid" alt="{{partner.name}}" />
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Clients Section -->
+
+    <!-- product Section -->
+    <section id="product" class="portfolio section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-translate="products">Our Products</h2>
+        <p data-translate="product_sub">CHECK OUR PRODUCTS</p>
+      </div>
+      <!-- End Section Title -->
+
+      <div class="container">
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-translate="all" data-filter="*" class="filter-active">
+              All
+            </li>
+            {% for category in categoryes %}
+            <li data-filter=".{{ category.category_name }}">
+              {{ category.category_name }}
+            </li>
+            {% endfor %}
+          </ul>
+          <!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+            {% for product in products %}
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item {{ product.category_name }}">
+              <div class="portfolio-content h-100">
+                {% if product.image %}
+
+                <img src="{{product.image.url}}" class="img-fluid" alt="" />
+
+                {% endif %}
+                <div class="portfolio-info">
+                  <h4>{{ product.name }}</h4>
+                  <a href="{% url 'product-details' product.pk %}" title="More Details" class="details-link"><i
+                      class="bi bi-eye-fill"></i></a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <!-- End Portfolio Item -->
+          </div>
+          <!-- End Portfolio Container -->
+        </div>
+      </div>
+    </section>
+    <!-- /News Section -->
+    <section id="news" class="news section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-translate="news_title">Latest News</h2>
+        <p data-translate="news_sub">Stay updated with our latest news</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper news-slider">
+          <div class="swiper-wrapper">
+            <!-- News Card 1 -->
+            {% for ne in news %}
+            <div class="swiper-slide">
+              <div class="card h-100 shadow-sm">
+                {% if ne.image %}
+                <img src="{{ ne.image.url }}" class="card-img-top" alt="{{ne.title}}" />
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">{{ne.title|truncatewords:4}}</h5>
+
+                  <p class="card-text">{{ne.description|truncatewords:10}}</p>
+                  <p>
+                    Published in
+                    <span class="text-primary"> {{ne.publish_date}} </span>
+                  </p>
+                  <a data-translate="read_more" href="{%  url 'news-details' ne.pk %}" class="btn btn-primary">Read
+                    More</a>
+                </div>
+              </div>
+            </div>
+            {% endfor%}
+            <!-- End News Card 1 -->
+          </div>
+          <!-- Swiper Pagination -->
+          <div class="swiper-pagination"></div>
+          <!-- Swiper Navigation -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- team Section -->
+    <section id="team" class="testimonials section dark-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-translate="founder">Team</h2>
+        <p data-translate="our_teams">Our Great Team</p>
+      </div>
+      <img src="{% static 'assets/img/testimonials-bg.jpg' %}" class="testimonials-bg" alt="" />
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                }
+              }
+            </script>
+          <div class="swiper-wrapper">
+            {% for founder in founders %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                {% if founder.image %}
+                <img src="{{founder.image.url}}" class="testimonial-img" alt="" />
+                {% endif%}
+                <h3>{{founder.name}}</h3>
+                <h4>{{founder.position}}</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>{{founder.bio}}</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+            {%endfor%}
+            <!-- End founder item -->
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+    <!-- /Testimonials Section -->
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-translate="contact">Contact</h2>
+        <p data-translate="contact_sub">The way of communication</p>
+      </div>
+      <!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+          <div class="col">
+            <form action="{% url 'contact' %}" method="post" class="email-form" data-aos="fade-up" data-aos-delay="500">
+              {% csrf_token %}
+              <div class="row gy-4">
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="" />
+                </div>
+                <div class="col-md-6">
+                  <input type="text" name="lastname" class="form-control" placeholder="Your Last Name" required="" />
+                </div>
+
+                <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="" />
+                </div>
+                <div class="col-md-6">
+                  <label style="font-size: 12px" for="gen">Gender</label>
+                  <select class="form-select" id="gen" name="gender" placeholder="Gender">
+                    <option data-translate="M" value="M">Male</option>
+                    <option data-translate="F" value="F">Female</option>
+                    <option data-translate="O" value="O">Other</option>
+                  </select>
+                </div>
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="" />
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
+                </div>
+                <button data-translate="submit" type="submit">
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- End Contact Form -->
+        </div>
+      </div>
+    </section>
+    <!-- /Contact Section -->
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container footer-top">
+      <div class="row gy-4 gap-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="{% static 'index.html' %}" class="logo d-flex align-items-center">
+            <span class="sitename">Cheshma</span>
+          </a>
+
+          <div class="footer-contact pt-3">
+            <img class="img-fluid rounded-2" src="{% static 'assets/img/footer.jpg' %}" alt="" />
+          </div>
+
+          <div class="social-links d-flex mt-4">
+            <a href="{% static '' %}"><i class="bi bi-twitter-x"></i></a>
+            <a href="{% static '' %}"><i class="bi bi-facebook"></i></a>
+            <a href="{% static '' %}"><i class="bi bi-instagram"></i></a>
+            <a href="{% static '' %}"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links p-3">
+          <h4>Useful Links</h4>
+          <ul class="fw-bolder">
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a data-translate="home" href="#hero">Home</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a data-translate="our_company" href="#about">Our Company</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a data-translate="services" href="#services">Services</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a data-translate="products" href="#product">Our Products</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a data-translate="our_team" href="#team">Our Team</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a data-translate="client" href="#clients">Our Clients</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a target="_blank" data-translate="imprint" href="{% url 'imprint' %}">Imprint</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4 class="p-2" data-translate="goals">Our Goals</h4>
+          <h3 data-translate="footer_p1" class="mb-3">
+            We reflect Afghani culture in Germany.
+          </h3>
+
+          <h2 style="background-color: #1783ff" class="text-center  rounded-4">
+            🇦🇫 <span class="ms-3"></span>🇩🇪
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>
+        2025 © <span>Copyright</span>
+        <strong class="px-1 sitename">Cheshma</strong>
+        <span>All Rights Reserved</span>
+      </p>
+      <div class="credits">
+        Designed & Developed by
+        <a target="_blank" href="https:www.linkedin.com/in/musawer-hashimi">Sayed Musawer Hashimi</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  <script src="{% static 'assets/js/swaper-news.js'%}"></script>
+  <script src="{% static 'assets/js/swaper-client.js'%}"></script>
+  <script src="{% static 'assets/js/translates.js'%}"></script>
+</body>
+
+</html>
