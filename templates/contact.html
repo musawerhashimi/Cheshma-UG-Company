@@ -1,0 +1,226 @@
+{%load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contact</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.jpg' %}" rel="icon" />
+    <link href="{% static 'assets/img/favicon.jpg' %}" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+    <!-- Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <header style="background-color: rgba(21, 34, 43, 0.85)" id="header"
+        class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
+                <img src="{% static 'assets/img/Logo.png' %}" alt="" />
+                <h1 class="sitename">Cheshma</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li>
+                        <a data-translate="home" href="{% url 'home'%}">Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href=""><span data-translate="about">About Us</span>
+                            <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li>
+                                <a data-translate="our_company" href="{% url 'home'%}#about">Our Company</a>
+                            </li>
+
+                            <li><a data-translate="our_team" href="{% url 'team'%}">Our Team</a></li>
+                            <li>
+                                <a data-translate="client" href="{% url 'home'%}#clients">Our Clients</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a data-translate="services" href="{% url 'home'%}#services">Services</a></li>
+                    <li>
+                        <a data-translate="products" href="{% url 'product'%}">Our Products</a>
+                    </li>
+                    <li><a data-translate="news" href="{% url 'home'%}#news">News</a></li>
+                    <li><a data-translate="contact" href="{% url 'contact' %}" class="active">Contact</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a target="_blank" href="{% url 'admin:index' %}">Admin</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login'%}">Login</a></li>
+                    {% endif %}
+                    <li>
+                        <select id="langSelect" class="p-1 rounded-1">
+                            <option value="en"><span class="ms-3">🇬🇧</span> English</option>
+                            <option value="de">
+                                <span class="ms-3">🇩🇪</span> >Deutsch
+                            </option>
+                        </select>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <br> <br> <br> <br>
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2 data-translate="contact">Contact</h2>
+            <p data-translate="contact_sub">The way of communication</p>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row gy-4">
+                <div class="col">
+                    <form action="{% url 'contact' %}" method="post" class="email-form" data-aos="fade-up"
+                        data-aos-delay="500">
+                        {% csrf_token %}
+                        <div class="row gy-4">
+                            <div class="col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name"
+                                    required="" />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="lastname" class="form-control" placeholder="Your Last Name"
+                                    required="" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email"
+                                    required="" />
+                            </div>
+                            <div class="col-md-6">
+                                <label style="font-size: 12px" for="gen">Gender</label>
+                                <select class="form-select" id="gen" name="gender" placeholder="Gender">
+                                    <option data-translate="M" value="M">Male</option>
+                                    <option data-translate="F" value="F">Female</option>
+                                    <option data-translate="O" value="O">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                    required="" />
+                            </div>
+
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="message" rows="4" placeholder="Message"
+                                    required=""></textarea>
+                            </div>
+                            <button data-translate="submit" type="submit">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- End Contact Form -->
+            </div>
+        </div>
+    </section>
+    <!-- /Contact Section -->
+    <footer id="footer" class="footer dark-background">
+        <div class="container footer-top">
+            <div class="row gy-4 gap-4">
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+                        <span class="sitename">Cheshma UG (Haftungsbeschränkt)</span>
+                    </a>
+
+                    <div class="footer-contact pt-3">
+                        <img class="img-fluid rounded-2" src="{% static 'assets/img/foo.png' %}" alt="" />
+                    </div>
+
+                    <div class="social-links d-flex mt-4">
+                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-facebook"></i></a>
+                        <a href=""><i class="bi bi-instagram"></i></a>
+                        <a href=""><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 footer-links p-3">
+                    <h4>Useful Links</h4>
+                    <ul class="fw-bolder">
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="home" href="{% url 'home'%}">Home</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="our_company" href="{% url 'home'%}#about">Our Company</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="services" href="{% url 'home'%}#services">Services</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="products" href="{% url 'product'%}">Our Products</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="our_team" href="{% url 'team'%}">Our Team</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="client" href="{% url 'home'%}#clients">Our Clients</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a target="_blank" data-translate="imprint" href="{% url 'imprint' %}">Imprint</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-12 footer-newsletter">
+                    <h3 class="p-2" data-translate="ftitle_1">Let's work together</h3>
+                    <h5 data-translate="ftitle_2" class="p-2">Whether you have questions, are planning a project, or
+                        just want to learn more</h5> <a href="{% url 'contact' %}"><span
+                            class="fw-bolder fs-5 p-2 pe-0" data-translate="ftitle_3">Contact Us</span></a><span
+                        class="fs-5 p-2 ps-0" data-translate="ftitle_4">, and we'll find the best solution
+                        together.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container copyright text-center mt-4">
+            <p>
+                2025 © <span>Copyright</span>
+                <strong class="px-1 sitename">Cheshma UG (Haftungsbeschränkt)</strong>
+
+            </p>
+
+        </div>
+    </footer>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/translates.js'%}"></script>
+</body>
+
+</html>

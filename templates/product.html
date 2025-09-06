@@ -1,0 +1,253 @@
+{%load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Our Products</title>
+    <meta name="description"
+        content="Cheshma UG is a Germany-based trading company specializing in the import and wholesale of carefully selected products, with a current focus on authentic goods from Afghanistan." />
+    <meta name="keywords"
+        content="Afghani Products,Traditional Afghan items,Handicrafts, Hextiles, Dried fruits, and Spices" />
+
+
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.jpg' %}" rel="icon" />
+    <link href="{% static 'assets/img/favicon.jpg' %}" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+
+
+    <!-- Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elem = document.querySelector('.isotope-container');
+            if (elem) {
+                var iso = new Isotope(elem, {
+                    itemSelector: '.isotope-item',
+                    layoutMode: 'masonry'
+                });
+
+                // Filter buttons
+                document.querySelectorAll('.portfolio-filters li').forEach(function (filterBtn) {
+                    filterBtn.addEventListener('click', function () {
+                        document.querySelectorAll('.portfolio-filters li').forEach(function (el) {
+                            el.classList.remove('filter-active');
+                        });
+                        this.classList.add('filter-active');
+                        var filterValue = this.getAttribute('data-filter');
+                        iso.arrange({ filter: filterValue });
+                    });
+                });
+            }
+        });
+    </script>
+</head>
+
+<body class="index-page">
+    <header style="background-color: rgba(21, 34, 43, 0.85)" id="header"
+        class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
+                <img src="{% static 'assets/img/Logo.png' %}" alt="" />
+                <h1 class="sitename">Cheshma</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li>
+                        <a data-translate="home" href="{% url 'home'%}">Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href=""><span data-translate="about">About Us</span>
+                            <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li>
+                                <a data-translate="our_company" href="{% url 'home'%}#about">Our Company</a>
+                            </li>
+
+                            <li><a data-translate="our_team" href="{% url 'team'%}">Our Team</a></li>
+                            <li>
+                                <a data-translate="client" href="{% url 'home'%}#clients">Our Clients</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a data-translate="services" href="{% url 'home'%}#services">Services</a></li>
+                    <li>
+                        <a data-translate="products" href="{% url 'product'%}" class="active">Our Products</a>
+                    </li>
+                    <li><a data-translate="news" href="{% url 'home'%}#news">News</a></li>
+                    <li><a data-translate="contact" href="{% url 'contact' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a target="_blank" href="{% url 'admin:index' %}">Admin</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login'%}">Login</a></li>
+                    {% endif %}
+                    <li>
+                        <select id="langSelect" class="p-1 rounded-1">
+                            <option value="en"><span class="ms-3">🇬🇧</span> English</option>
+                            <option value="de">
+                                <span class="ms-3">🇩🇪</span> Deutsch
+                            </option>
+                        </select>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <br><br><br> <br>
+    <!-- product Section -->
+    <section id="product" class="portfolio section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up" data-aos-delay="100">
+            <h2 data-translate="products">Our Products</h2>
+            <p data-translate="product_sub">CHECK OUR PRODUCTS</p>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container"  data-aos="fade-up" data-aos-delay="100">
+            <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                <ul class="portfolio-filters isotope-filters">
+                    <li data-translate="all" data-filter="*" class="filter-active">
+                        All
+                    </li>
+                    {% for category in categoryes %}
+                    <li data-filter=".{{ category.category_name|cut:' ' }}">
+                        {{ category.category_name}}
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!-- End Portfolio Filters -->
+
+                <div class="row gy-4 isotope-container "  data-aos="fade-up" data-aos-delay="100">
+                    {% for product in products %}
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item {{ product.category_name|cut:' ' }}">
+                        <div class="portfolio-content h-100">
+                            {% if product.image %}
+
+                            <img style="width: 100%; height: 300px;" src="{{product.image.url}}"  alt="" />
+
+                            {% endif %}
+                            <div class="portfolio-info">
+                                <h4>{{ product.name }}</h4>
+
+                                <a href="{% url 'product-details' product.pk %}" class="details-link"><span
+                                        data-translate="see">See more</span> <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- End Portfolio Item -->
+                </div>
+                <!-- End Portfolio Container -->
+            </div>
+        </div>
+    </section>
+    <footer id="footer" class="footer dark-background">
+        <div class="container footer-top">
+            <div class="row gy-4 gap-4">
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+                        <span class="sitename">Cheshma UG (Haftungsbeschränkt)</span>
+                    </a>
+
+                    <div class="footer-contact pt-3">
+                        <img class="img-fluid rounded-2" src="{% static 'assets/img/foo.png' %}" alt="" />
+                    </div>
+
+                    <div class="social-links d-flex mt-4">
+                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-facebook"></i></a>
+                        <a href=""><i class="bi bi-instagram"></i></a>
+                        <a href=""><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 footer-links p-3">
+                    <h4>Useful Links</h4>
+                    <ul class="fw-bolder">
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="home" href="{% url 'home'%}">Home</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="our_company" href="{% url 'home'%}#about">Our Company</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="services" href="{% url 'home'%}#services">Services</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="products" href="{% url 'product'%}">Our Products</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="our_team" href="{% url 'team'%}">Our Team</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a data-translate="client" href="{% url 'home'%}#clients">Our Clients</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i>
+                            <a target="_blank" data-translate="imprint" href="{% url 'imprint' %}">Imprint</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-12 footer-newsletter">
+                    <h3 class="p-2" data-translate="ftitle_1">Let's work together</h3>
+                    <h5 data-translate="ftitle_2" class="p-2">Whether you have questions, are planning a project, or
+                        just want to learn more</h5> <a href="{% url 'contact' %}"><span class="fw-bolder fs-5 p-2 pe-0"
+                            data-translate="ftitle_3">Contact Us</span></a><span class="fs-5 p-2 ps-0"
+                        data-translate="ftitle_4">, and we'll find the best solution
+                        together.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container copyright text-center mt-4">
+            <p>
+                2025 © <span>Copyright</span>
+                <strong class="px-1 sitename">Cheshma UG (Haftungsbeschränkt)</strong>
+
+            </p>
+
+        </div>
+    </footer>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+     <script>
+          AOS.init({
+            once: true,
+            duration: 1000,
+          });
+        </script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/translates.js'%}"></script>
+</body>
+
+</html>

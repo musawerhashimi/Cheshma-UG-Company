@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>{{news.title}}</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description" content="Cheshma UG is a Germany-based trading company specializing in the import and wholesale of carefully selected products, with a current focus on authentic goods from Afghanistan." />
+    <meta name="keywords" content="Afghani Products,Traditional Afghan items,Handicrafts, Hextiles, Dried fruits, and Spices" />
 
     <!-- Favicons -->
     <link href="{% static 'assets/img/favicon.jpg' %}" rel="icon" />
@@ -25,10 +25,7 @@
       href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
       rel="stylesheet"
     />
-    <link
-      href="{% static 'assets/vendor/bootstrap/css/flag-icons.min.css' %}"
-      rel="stylesheet"
-    />
+
     <link
       href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
       rel="stylesheet"
@@ -52,14 +49,14 @@
           href="{% url 'home' %}"
           class="logo d-flex align-items-center me-auto"
         >
-          <img class="w-50" src="{% static 'assets/img/Logo.png' %}" alt="" />
+          <img  src="{% static 'assets/img/Logo.png' %}" alt="" />
           <h1 class="sitename">Cheshma</h1>
         </a>
       </div>
     </header>
     <br /><br />
     <div class="container my-5">
-      <div style="margin-top: 95px" class="fixed-top p-1">
+      <div style="margin-top: 110px" class="fixed-top p-1">
         <ul>
           <li style="display: inline-block">
             <a href="{% url 'home' %}">Home ></a>
@@ -72,9 +69,9 @@
           </li>
         </ul>
       </div>
-
+<br> <br>
       <!-- News Details Section -->
-      <div class="row ms-3">
+      <div class="row ">
         <div class="col-lg-8 mx-auto mt-3">
           <h1 class="mb-3 ms-2">{{news.title}}</h1>
           <!-- News Image -->
@@ -102,25 +99,25 @@
         <div class="row gy-4 gap-4">
           <div class="col-lg-4 col-md-6 footer-about">
             <a
-              href="{% static 'index.html' %}"
+              href="{% url 'home' %}"
               class="logo d-flex align-items-center"
             >
-              <span class="sitename">Cheshma</span>
+              <span class="sitename">Cheshma UG (Haftungsbeschränkt)</span>
             </a>
 
             <div class="footer-contact pt-3">
               <img
                 class="img-fluid rounded-2"
-                src="{% static 'assets/img/footer.jpg' %}"
+                src="{% static 'assets/img/foo.png' %}"
                 alt=""
               />
             </div>
 
             <div class="social-links d-flex mt-4">
-              <a href="{% static '' %}"><i class="bi bi-twitter-x"></i></a>
-              <a href="{% static '' %}"><i class="bi bi-facebook"></i></a>
-              <a href="{% static '' %}"><i class="bi bi-instagram"></i></a>
-              <a href="{% static '' %}"><i class="bi bi-linkedin"></i></a>
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
 
@@ -145,13 +142,13 @@
               </li>
               <li>
                 <i class="bi bi-chevron-right"></i>
-                <a data-translate="products" href="{% url 'home'%}#product"
+                <a data-translate="products" href="{% url 'product'%}"
                   >Our Products</a
                 >
               </li>
               <li>
                 <i class="bi bi-chevron-right"></i>
-                <a data-translate="our_team" href="{% url 'home'%}#team"
+                <a data-translate="our_team" href="{% url 'team'%}"
                   >Our Team</a
                 >
               </li>
@@ -173,31 +170,20 @@
             </ul>
           </div>
 
-          <div class="col-lg-4 col-md-12 footer-newsletter">
-            <h4 class="p-2" data-translate="goals">Our Goals</h4>
-            <h3 data-translate="footer_p1" class="mb-3">
-              We reflect Afghani culture in Germany.
-            </h3>
-
-            <h2 style="background-color: #1783ff" class="text-center rounded-4">
-              🇦🇫 <span class="ms-3"></span>🇩🇪
-            </h2>
-          </div>
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h3 class="p-2" data-translate="ftitle_1">Let's work together</h3>
+          <h5 data-translate="ftitle_2" class="p-2">Whether you have questions, are planning a project, or just want to learn more</h5> <a   href="{% url 'contact' %}"><span class="fw-bolder fs-5 p-2 pe-0" data-translate="ftitle_3">Contact Us</span></a><span class="fs-5 p-2 ps-0"  data-translate="ftitle_4">, and we'll find the best solution together.</span>
+        </div>
         </div>
       </div>
 
       <div class="container copyright text-center mt-4">
         <p>
           2025 © <span>Copyright</span>
-          <strong class="px-1 sitename">Cheshma</strong>
-          <span>All Rights Reserved</span>
+  <strong class="px-1 sitename">Cheshma UG (haftungsbeschränkt)</strong>
+
         </p>
-        <div class="credits">
-          Designed & Developed by
-          <a target="_blank" href="https:www.linkedin.com/in/musawer-hashimi"
-            >Sayed Musawer Hashimi</a
-          >
-        </div>
+
       </div>
     </footer>
   </body>

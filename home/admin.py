@@ -1,4 +1,4 @@
-from django.contrib import admin 
+from django.contrib import admin
 from django.contrib.admin import register
 from .models import *
 
@@ -29,9 +29,9 @@ class NewsAdmin(admin.ModelAdmin):
     list_display_links=['title']
 
 
-@register(Contact)
+@register(CustomerMessage)
 class ContactAdmin(admin.ModelAdmin):
-    list_display=["id","name","lastname","email","gender","subject","comment","send_date"]
+    list_display=["id","name","lastname","gender","email","subject","comment","send_date"]
     list_display_links=['name']
 
 

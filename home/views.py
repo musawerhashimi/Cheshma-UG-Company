@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from django.core.mail import send_mail
 from django.conf import settings
-    
+
 
 
 def home(request):
@@ -17,6 +17,8 @@ def home(request):
     content_5=News.objects.all()
     content_6=Founder.objects.all()
 
+
+
     context={
         "background_image":content_1,
         "categoryes":content_2,
@@ -24,7 +26,7 @@ def home(request):
         "partners":content_4,
         "news":content_5,
         "founders":content_6,
-        
+
     }
     return render(request,'index.html', context)
 
@@ -49,21 +51,36 @@ def user_contact(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        Contact.objects.create(
+        CustomerMessage.objects.create(
             name=name,
             email=email,
             subject=subject,
             comment=message,
             gender=gender,
-            lastname=lastname
+            lastname=lastname,
         )
 
         messages.success(request, "Your message has been sent.")
-        return redirect('home')  
-    return render(request, 'index.html') 
+        return redirect('home')
+    return render(request, 'contact.html')
 
 
 
+def product(request):
+    product=Product.objects.all()
+    category=Category.objects.all()
+    context={
+        "products":product,
+        "categoryes":category
+    }
+    return render(request,'product.html',context)
+
+def team(request):
+    founder=Founder.objects.all()
+    context={
+        "founders":founder
+    }
+    return render(request,'team.html',context)
 #------------part of login View ---------------#
 
 def login_user(request):
@@ -107,7 +124,7 @@ def password_reset(request):
             )
 
             messages.success(request, 'A new password has been sent to your email: {email}')
-            return redirect('login') 
+            return redirect('login')
 
         except User.DoesNotExist:
             messages.error(request, 'User with this email address not found!')

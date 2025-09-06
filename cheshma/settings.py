@@ -1,4 +1,3 @@
-
 from decouple import config
 import os
 from pathlib import Path
@@ -14,21 +13,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-#-------Reset passwor Email---#
+ALLOWED_HOSTS = ['*']  # Update this in production to use specific domains
+
+
+#-------Email Configuration for Password Reset---#
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'musawerhashimi09@gmail.com'         # ایمیل فرستنده
-EMAIL_HOST_PASSWORD = 'xkyx kyzb cthn leax'        
+EMAIL_HOST_USER = 'info.cheshma@gmail.com'         # Your email sender address
+EMAIL_HOST_PASSWORD = 'fkwx exyz pbnw acor'           # Your email password (consider using env vars in production)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-#-------End reset passwor Email---#
+#-------End Reset Password Email Configuration---#
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,12 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home',  # Custom app for the cheshma web
+    'home',  # Your custom app
 ]
 
-
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For static file handling in production
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,10 +52,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cheshma.urls'
 
+# Template configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # Ensure templates are in the 'templates/' directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,19 +73,21 @@ WSGI_APPLICATION = 'cheshma.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cheshma$cheshma',
+        'USER': 'cheshma',
+        'PASSWORD': '10marchH$',
+        'HOST': 'cheshma.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -101,44 +103,34 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-# STATIC_URL = 'static/'
-
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-# ]
-
-# STATIC_ROOT = BASE_DIR / "staticfiles"
-# MEDIA_URL= '/media/'
-# MEDIA_ROOT=  os.path.join(BASE_DIR,'MEDIA')
-
-
-
 STATIC_URL = '/static/'
-STATIC_ROOT= os.path.join(BASE_DIR,'static')
 
-MEDIA_URL= '/media/'
-MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+# Directory where collectstatic will gather static files for production
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Only for production
 
-STATICFILES_STORAGE ='whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Additional directories to look for static files
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # For development
+]
 
+
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Ensure this is the correct path for your static files
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Static files storage using WhiteNoise for compressed and cached static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+WHITENOISE_MANIFEST_STRICT = False  # Set to True in production for strict checks
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
